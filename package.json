@@ -1,0 +1,18 @@
+{
+  "name": "clipper-js-fpoint",
+  "version": "6.4.222",
+  "description": "https://sourceforge.net/projects/jsclipper/files/",
+  "main": "clipper_unminified.js",
+  "files": [
+    "clipper_unminified.js",
+    "clipper.js",
+    "clipper-js-fpoint.d.ts",
+    "README.txt",
+    "package.json"
+  ],
+  "types": "clipper-js-fpoint.d.ts",
+  "scripts": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
