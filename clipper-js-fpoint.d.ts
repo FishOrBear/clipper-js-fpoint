@@ -21,7 +21,7 @@ export class Clipper
 
     AppendPolygon(e1: any, e2: any): void;
 
-    Area(op: any): any;
+    Area(op: Path): number;
 
     Area$1(outRec: any): any;
 
@@ -207,7 +207,7 @@ export class Clipper
 
     static AddPolyNodeToPaths(polynode: any, nt: any, paths: any): void;
 
-    static Area(poly: any): any;
+    static Area(poly: Path): number;
 
     static CleanPolygon(path: any, distance: any): any;
 
@@ -227,11 +227,11 @@ export class Clipper
 
     static IsHorizontal(e: any): any;
 
-    static Minkowski(pattern: any, path: any, IsSum: any, IsClosed: any): any;
+    static Minkowski(pattern: Path, path: Path, IsSum: boolean, IsClosed: boolean): Paths;
 
-    static MinkowskiDiff(poly1: any, poly2: any): any;
+    static MinkowskiDiff(poly1: Path, poly2: Path): any;
 
-    static MinkowskiSum(pattern: any, path_or_paths: any, pathIsClosed: any): any;
+    static MinkowskiSum(pattern: Path, path_or_paths: Path | Paths, pathIsClosed: boolean): Paths;
 
     static NodeType: {
         ntAny: number;
@@ -514,7 +514,8 @@ export const PI: number;
 
 export const PI2: number;
 
-export enum PolyFillType{
+export enum PolyFillType
+{
     pftEvenOdd = 0,
     pftNonZero = 1,
     pftPositive = 2,
