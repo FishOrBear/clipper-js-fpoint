@@ -15,13 +15,13 @@ export class Clipper
 
     AddOutPt(e: any, pt: any): any;
 
-    AddPath(pg: Path, polyType: PolyType, Closed: boolean): any;
+    AddPath(pg: Path, polyType: PolyType, Closed: boolean): boolean;
 
-    AddPaths(ppg: any, polyType: any, closed: any): any;
+    AddPaths(ppg: Paths, polyType: PolyType, closed: boolean): boolean;
 
     AppendPolygon(e1: any, e2: any): void;
 
-    Area(op: Path): number;
+    Area(op: { Pt: FPoint, Prev: FPoint, Next: FPoint }): number;
 
     Area$1(outRec: any): any;
 
