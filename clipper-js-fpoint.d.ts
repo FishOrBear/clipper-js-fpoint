@@ -209,9 +209,9 @@ export class Clipper
 
     static Area(poly: Path): number;
 
-    static CleanPolygon(path: any, distance: any): any;
+    static CleanPolygon(path: Path, distance: number): Path;
 
-    static CleanPolygons(polys: any, distance: any): any;
+    static CleanPolygons(polys: Paths, distance: number): Paths;
 
     static ClosedPathsFromPolyTree(polytree: any): any;
 
