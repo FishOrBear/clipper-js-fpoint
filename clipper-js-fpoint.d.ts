@@ -387,7 +387,11 @@ export class ClipperOffset
 {
     m_destPolys: Paths;
     m_destPoly: Path;
-    constructor(miterLimit: number = 2, arcTolerance: number = 0.25);
+    /**
+     * @param [miterLimit] 2
+     * @param [arcTolerance] 0.25
+     */
+    constructor(miterLimit?: number, arcTolerance?: number);
 
     AddPath(path: Path, joinType: JoinType, endType: EndType): void;
 
@@ -480,19 +484,19 @@ export enum ClipType
     ctUnion = 1,
     ctDifference = 2,
     ctXor = 3
-};
+}
 
 export enum Direction
 {
     dRightToLeft = 0,
     dLeftToRight = 1
-};
+}
 
 export enum EdgeSide
 {
     esLeft = 0,
     esRight = 1
-};
+}
 
 export enum EndType
 {
@@ -501,14 +505,14 @@ export enum EndType
     etOpenButt = 2,
     etClosedLine = 3,
     etClosedPolygon = 4
-};
+}
 
 export enum JoinType
 {
     jtSquare = 0,
     jtRound = 1,
     jtMiter = 2,
-};
+}
 
 export const PI: number;
 
@@ -520,13 +524,13 @@ export enum PolyFillType
     pftNonZero = 1,
     pftPositive = 2,
     pftNegative = 3
-};
+}
 
 export enum PolyType
 {
     ptSubject = 0,
     ptClip = 1
-};
+}
 
 export const use_lines: boolean;
 
@@ -574,5 +578,4 @@ export namespace JS
     function PerimeterOfPaths(paths: any, closed: any): any;
 
     function PolyTreeToExPolygons(polytree: any): any;
-
 }
