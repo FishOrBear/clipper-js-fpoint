@@ -1,6 +1,6 @@
 {
   "name": "clipper-js-fpoint",
-  "version": "6.4.226",
+  "version": "6.4.227",
   "description": "https://sourceforge.net/projects/jsclipper/files/",
   "main": "clipper_unminified.js",
   "files": [

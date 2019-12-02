@@ -385,8 +385,8 @@ export class ClipperBase
 
 export class ClipperOffset
 {
-    m_destPolys: Paths;
-    m_destPoly: Path;
+    private m_destPolys: Paths;
+    private m_destPoly: Path;
     /**
      * @param [miterLimit] 2
      * @param [arcTolerance] 0.25
@@ -394,31 +394,22 @@ export class ClipperOffset
     constructor(miterLimit?: number, arcTolerance?: number);
 
     AddPath(path: Path, joinType: JoinType, endType: EndType): void;
-
     AddPaths(paths: Paths, joinType: JoinType, endType: EndType): void;
 
-    Clear(): void;
+    Execute(path: Paths, delta: number): void;
+    Execute(polytree: PolyType, delta: number): void;
 
-    DoMiter(j: any, k: any, r: any): void;
+    private Clear(): void;
+    private DoMiter(j: any, k: any, r: any): void;
+    private DoOffset(delta: number): void;
+    private DoRound(j: any, k: any): void;
+    private DoSquare(j: any, k: any): void;
+    private FixOrientations(): void;
+    private OffsetPoint(j: any, k: any, jointype: any): any;
 
-    DoOffset(delta: number): void;
-
-    DoRound(j: any, k: any): void;
-
-    DoSquare(j: any, k: any): void;
-
-    Execute(...args: any[]): void;
-
-    FixOrientations(): void;
-
-    OffsetPoint(j: any, k: any, jointype: any): any;
-
-    static GetUnitNormal(pt1: any, pt2: any): any;
-
-    static def_arc_tolerance: number;
-
-    static two_pi: number;
-
+    private static GetUnitNormal(pt1: any, pt2: any): any;
+    private static def_arc_tolerance: number;
+    private static two_pi: number;
 }
 
 export type Path = Array<IFPoint>;
