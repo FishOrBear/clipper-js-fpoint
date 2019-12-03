@@ -3224,7 +3224,7 @@
 				}
 
 				//When StrictlySimple and 'e' is being touched by another edge, then
-				//make sure both edges have a vertex here ...        
+				//make sure both edges have a vertex here ...
 				if (this.StrictlySimple) {
 					var ePrev = e.PrevInAEL;
 					if ((e.OutIdx >= 0) && (e.WindDelta !== 0) && ePrev !== null &&
@@ -3829,7 +3829,7 @@
 						result = 1 - result;
 					else {
 						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
-						if (d === 0)
+						if (Math.abs(d) < 1e-5)
 							return -1;
 						else if ((d > 0) === (ipNext.y > ip.y))
 							result = 1 - result;
@@ -3838,7 +3838,7 @@
 				else {
 					if (ipNext.x > pt.x) {
 						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
-						if (d === 0)
+						if (Math.abs(d) < 1e-5)
 							return -1;
 						else if ((d > 0) === (ipNext.y > ip.y))
 							result = 1 - result;

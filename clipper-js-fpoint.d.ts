@@ -145,7 +145,7 @@ export class Clipper
 
     PointCount(pts: any): any;
 
-    PointInPolygon(pt: any, op: any): any;
+    PointInPolygon(pt: IFPoint, op: any): any;
 
     PointIsVertex(pt: any, pp: any): any;
 
@@ -245,7 +245,7 @@ export class Clipper
 
     static ParseFirstLeft(FirstLeft: any): any;
 
-    static PointInPolygon(pt: any, path: any): any;
+    static PointInPolygon(pt: IFPoint, path: Path): any;
 
     static PointsAreClose(pt1: any, pt2: any, distSqrd: any): any;
 
