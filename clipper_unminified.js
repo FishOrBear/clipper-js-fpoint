@@ -1877,7 +1877,7 @@
 		// public DoublePoint(IntPoint ip)
 		if (a.length === 1)
 		{
-			this.x = a[0].X;
+			this.x = a[0].x;
 			this.y = a[0].y;
 		}
 		else if (a.length === 2)
@@ -1903,7 +1903,7 @@
 	*/
 	ClipperLib.DoublePoint1 = function (dp)
 	{
-		this.x = dp.X;
+		this.x = dp.x;
 		this.y = dp.y;
 	};
 
@@ -2147,7 +2147,7 @@
 				if (a[0] instanceof ClipperLib.DoublePoint) // public IntPoint(DoublePoint dp)
 				{
 					var dp = a[0];
-					this.x = ClipperLib.Clipper.Round(dp.X);
+					this.x = ClipperLib.Clipper.Round(dp.x);
 					this.y = ClipperLib.Clipper.Round(dp.y);
 					this.Z = 0;
 				}
@@ -2155,7 +2155,7 @@
 				{
 					var pt = a[0];
 					if (typeof (pt.Z) === "undefined") pt.Z = 0;
-					this.x = pt.X;
+					this.x = pt.x;
 					this.y = pt.y;
 					this.Z = pt.Z;
 				}
@@ -2179,13 +2179,13 @@
 				if (a[0] instanceof ClipperLib.DoublePoint) // public IntPoint(DoublePoint dp)
 				{
 					var dp = a[0];
-					this.x = ClipperLib.Clipper.Round(dp.X);
+					this.x = ClipperLib.Clipper.Round(dp.x);
 					this.y = ClipperLib.Clipper.Round(dp.y);
 				}
 				else // public IntPoint(IntPoint pt)
 				{
 					var pt = a[0];
-					this.x = pt.X;
+					this.x = pt.x;
 					this.y = pt.y;
 				}
 			}
@@ -2217,7 +2217,7 @@
     if (obj instanceof ClipperLib.IntPoint)
     {
         var a = Cast(obj, ClipperLib.IntPoint);
-        return (this.x== a.X) && (this.y == a.y);
+        return (this.x== a.x) && (this.y == a.y);
     }
     else
         return false;
@@ -2243,7 +2243,7 @@
 	*/
 	ClipperLib.IntPoint1 = function (pt)
 	{
-		this.x = pt.X;
+		this.x = pt.x;
 		this.y = pt.y;
 		if (ClipperLib.use_xyz)
 		{
@@ -2259,7 +2259,7 @@
 	*/
 	ClipperLib.IntPoint1dp = function (dp)
 	{
-		this.x = ClipperLib.Clipper.Round(dp.X);
+		this.x = ClipperLib.Clipper.Round(dp.x);
 		this.y = ClipperLib.Clipper.Round(dp.y);
 		if (ClipperLib.use_xyz)
 			this.Z = 0;
@@ -2561,14 +2561,14 @@
 	ClipperLib.ClipperBase.prototype.PointOnLineSegment = function (pt, linePt1, linePt2, UseFullRange)
 	{
 		if (UseFullRange)
-			return ((pt.x === linePt1.X) && (pt.y === linePt1.y)) ||
-				((pt.x === linePt2.X) && (pt.y === linePt2.y)) ||
-				(((pt.x > linePt1.X) === (pt.x < linePt2.X)) &&
+			return ((pt.x === linePt1.x) && (pt.y === linePt1.y)) ||
+				((pt.x === linePt2.x) && (pt.y === linePt2.y)) ||
+				(((pt.x > linePt1.x) === (pt.x < linePt2.x)) &&
 					((pt.y > linePt1.y) === (pt.y < linePt2.y)) &&
-					(Int128.op_Equality(Int128.Int128Mul((pt.x - linePt1.X), (linePt2.y - linePt1.y)),
-						Int128.Int128Mul((linePt2.x - linePt1.X), (pt.y - linePt1.y)))));
+					(Int128.op_Equality(Int128.Int128Mul((pt.x - linePt1.x), (linePt2.y - linePt1.y)),
+						Int128.Int128Mul((linePt2.x - linePt1.x), (pt.y - linePt1.y)))));
 		else
-			return ((pt.x === linePt1.X) && (pt.y === linePt1.y)) || ((pt.x === linePt2.X) && (pt.y === linePt2.y)) || (((pt.x > linePt1.X) === (pt.x < linePt2.X)) && ((pt.y > linePt1.y) === (pt.y < linePt2.y)) && ((pt.x - linePt1.X) * (linePt2.y - linePt1.y) === (linePt2.x - linePt1.X) * (pt.y - linePt1.y)));
+			return ((pt.x === linePt1.x) && (pt.y === linePt1.y)) || ((pt.x === linePt2.x) && (pt.y === linePt2.y)) || (((pt.x > linePt1.x) === (pt.x < linePt2.x)) && ((pt.y > linePt1.y) === (pt.y < linePt2.y)) && ((pt.x - linePt1.x) * (linePt2.y - linePt1.y) === (linePt2.x - linePt1.x) * (pt.y - linePt1.y)));
 	};
 
 	ClipperLib.ClipperBase.prototype.PointOnPolygon = function (pt, pp, UseFullRange)
@@ -2596,9 +2596,9 @@
 			e2 = a[1];
 			UseFullRange = a[2];
 			if (UseFullRange)
-				return Int128.op_Equality(Int128.Int128Mul(e1.Delta.y, e2.Delta.X), Int128.Int128Mul(e1.Delta.X, e2.Delta.y));
+				return Int128.op_Equality(Int128.Int128Mul(e1.Delta.y, e2.Delta.x), Int128.Int128Mul(e1.Delta.x, e2.Delta.y));
 			else
-				return ClipperLib.Cast_Int64((e1.Delta.y) * (e2.Delta.X)) === ClipperLib.Cast_Int64((e1.Delta.X) * (e2.Delta.y));
+				return ClipperLib.Cast_Int64((e1.Delta.y) * (e2.Delta.x)) === ClipperLib.Cast_Int64((e1.Delta.x) * (e2.Delta.y));
 		}
 		else if (alen === 4) // function (pt1, pt2, pt3, UseFullRange)
 		{
@@ -2607,9 +2607,9 @@
 			pt3 = a[2];
 			UseFullRange = a[3];
 			if (UseFullRange)
-				return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt2.x - pt3.X), Int128.Int128Mul(pt1.x - pt2.X, pt2.y - pt3.y));
+				return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt2.x - pt3.x), Int128.Int128Mul(pt1.x - pt2.x, pt2.y - pt3.y));
 			else
-				return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt2.x - pt3.X)) - ClipperLib.Cast_Int64((pt1.x - pt2.X) * (pt2.y - pt3.y)) === 0;
+				return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt2.x - pt3.x)) - ClipperLib.Cast_Int64((pt1.x - pt2.x) * (pt2.y - pt3.y)) === 0;
 		}
 		else // function (pt1, pt2, pt3, pt4, UseFullRange)
 		{
@@ -2619,34 +2619,34 @@
 			pt4 = a[3];
 			UseFullRange = a[4];
 			if (UseFullRange)
-				return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt3.x - pt4.X), Int128.Int128Mul(pt1.x - pt2.X, pt3.y - pt4.y));
+				return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt3.x - pt4.x), Int128.Int128Mul(pt1.x - pt2.x, pt3.y - pt4.y));
 			else
-				return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt3.x - pt4.X)) - ClipperLib.Cast_Int64((pt1.x - pt2.X) * (pt3.y - pt4.y)) === 0;
+				return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt3.x - pt4.x)) - ClipperLib.Cast_Int64((pt1.x - pt2.x) * (pt3.y - pt4.y)) === 0;
 		}
 	};
 
 	ClipperLib.ClipperBase.SlopesEqual3 = function (e1, e2, UseFullRange)
 	{
 		if (UseFullRange)
-			return Int128.op_Equality(Int128.Int128Mul(e1.Delta.y, e2.Delta.X), Int128.Int128Mul(e1.Delta.X, e2.Delta.y));
+			return Int128.op_Equality(Int128.Int128Mul(e1.Delta.y, e2.Delta.x), Int128.Int128Mul(e1.Delta.x, e2.Delta.y));
 		else
-			return ClipperLib.Cast_Int64((e1.Delta.y) * (e2.Delta.X)) === ClipperLib.Cast_Int64((e1.Delta.X) * (e2.Delta.y));
+			return ClipperLib.Cast_Int64((e1.Delta.y) * (e2.Delta.x)) === ClipperLib.Cast_Int64((e1.Delta.x) * (e2.Delta.y));
 	};
 
 	ClipperLib.ClipperBase.SlopesEqual4 = function (pt1, pt2, pt3, UseFullRange)
 	{
 		if (UseFullRange)
-			return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt2.x - pt3.X), Int128.Int128Mul(pt1.x - pt2.X, pt2.y - pt3.y));
+			return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt2.x - pt3.x), Int128.Int128Mul(pt1.x - pt2.x, pt2.y - pt3.y));
 		else
-			return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt2.x - pt3.X)) - ClipperLib.Cast_Int64((pt1.x - pt2.X) * (pt2.y - pt3.y)) === 0;
+			return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt2.x - pt3.x)) - ClipperLib.Cast_Int64((pt1.x - pt2.x) * (pt2.y - pt3.y)) === 0;
 	};
 
 	ClipperLib.ClipperBase.SlopesEqual5 = function (pt1, pt2, pt3, pt4, UseFullRange)
 	{
 		if (UseFullRange)
-			return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt3.x - pt4.X), Int128.Int128Mul(pt1.x - pt2.X, pt3.y - pt4.y));
+			return Int128.op_Equality(Int128.Int128Mul(pt1.y - pt2.y, pt3.x - pt4.x), Int128.Int128Mul(pt1.x - pt2.x, pt3.y - pt4.y));
 		else
-			return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt3.x - pt4.X)) - ClipperLib.Cast_Int64((pt1.x - pt2.X) * (pt3.y - pt4.y)) === 0;
+			return ClipperLib.Cast_Int64((pt1.y - pt2.y) * (pt3.x - pt4.x)) - ClipperLib.Cast_Int64((pt1.x - pt2.x) * (pt3.y - pt4.y)) === 0;
 	};
 
 	ClipperLib.ClipperBase.prototype.Clear = function ()
@@ -2693,7 +2693,7 @@
 		e.Next = eNext;
 		e.Prev = ePrev;
 		//e.Curr = pt;
-		e.Curr.x = pt.X;
+		e.Curr.x = pt.x;
 		e.Curr.y = pt.y;
 		if (ClipperLib.use_xyz) e.Curr.Z = pt.Z;
 		e.OutIdx = -1;
@@ -2704,22 +2704,22 @@
 		if (e.Curr.y >= e.Next.Curr.y)
 		{
 			//e.Bot = e.Curr;
-			e.Bot.x = e.Curr.X;
+			e.Bot.x = e.Curr.x;
 			e.Bot.y = e.Curr.y;
 			if (ClipperLib.use_xyz) e.Bot.Z = e.Curr.Z;
 			//e.Top = e.Next.Curr;
-			e.Top.x = e.Next.Curr.X;
+			e.Top.x = e.Next.Curr.x;
 			e.Top.y = e.Next.Curr.y;
 			if (ClipperLib.use_xyz) e.Top.Z = e.Next.Curr.Z;
 		}
 		else
 		{
 			//e.Top = e.Curr;
-			e.Top.x = e.Curr.X;
+			e.Top.x = e.Curr.x;
 			e.Top.y = e.Curr.y;
 			if (ClipperLib.use_xyz) e.Top.Z = e.Curr.Z;
 			//e.Bot = e.Next.Curr;
-			e.Bot.x = e.Next.Curr.X;
+			e.Bot.x = e.Next.Curr.x;
 			e.Bot.y = e.Next.Curr.y;
 			if (ClipperLib.use_xyz) e.Bot.Z = e.Next.Curr.Z;
 		}
@@ -2744,7 +2744,7 @@
 			if (E.Top.y === E.Prev.Bot.y)
 				continue;
 			//ie just an intermediate horz.
-			if (E2.Prev.Bot.x < E.Bot.X)
+			if (E2.Prev.Bot.x < E.Bot.x)
 				E = E2;
 			break;
 		}
@@ -2806,10 +2806,10 @@
 
 			if (EStart.Dx === ClipperLib.ClipperBase.horizontal) //ie an adjoining horizontal skip edge
 			{
-				if (EStart.Bot.x !== E.Bot.x && EStart.Top.x !== E.Bot.X)
+				if (EStart.Bot.x !== E.Bot.x && EStart.Top.x !== E.Bot.x)
 					this.ReverseHorizontal(E);
 			}
-			else if (EStart.Bot.x !== E.Bot.X)
+			else if (EStart.Bot.x !== E.Bot.x)
 				this.ReverseHorizontal(E);
 		}
 
@@ -2826,17 +2826,17 @@
 				Horz = Result;
 				while (Horz.Prev.Dx === ClipperLib.ClipperBase.horizontal)
 					Horz = Horz.Prev;
-				if (Horz.Prev.Top.x > Result.Next.Top.X)
+				if (Horz.Prev.Top.x > Result.Next.Top.x)
 					Result = Horz.Prev;
 			}
 			while (E !== Result)
 			{
 				E.NextInLML = E.Next;
-				if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Prev.Top.X)
+				if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Prev.Top.x)
 					this.ReverseHorizontal(E);
 				E = E.Next;
 			}
-			if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Prev.Top.X)
+			if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Prev.Top.x)
 				this.ReverseHorizontal(E);
 			Result = Result.Next;
 			//move to the edge just beyond current bound
@@ -2850,7 +2850,7 @@
 				Horz = Result;
 				while (Horz.Next.Dx === ClipperLib.ClipperBase.horizontal)
 					Horz = Horz.Next;
-				if (Horz.Next.Top.x === Result.Prev.Top.x || Horz.Next.Top.x > Result.Prev.Top.X)
+				if (Horz.Next.Top.x === Result.Prev.Top.x || Horz.Next.Top.x > Result.Prev.Top.x)
 				{
 					Result = Horz.Next;
 				}
@@ -2858,11 +2858,11 @@
 			while (E !== Result)
 			{
 				E.NextInLML = E.Prev;
-				if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Next.Top.X)
+				if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Next.Top.x)
 					this.ReverseHorizontal(E);
 				E = E.Prev;
 			}
-			if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Next.Top.X)
+			if (E.Dx === ClipperLib.ClipperBase.horizontal && E !== EStart && E.Bot.x !== E.Next.Top.x)
 				this.ReverseHorizontal(E);
 			Result = Result.Prev;
 			//move to the edge just beyond current bound
@@ -2899,7 +2899,7 @@
 		//1. Basic (first) edge initialization ...
 
 		//edges[1].Curr = pg[1];
-		edges[1].Curr.x = pg[1].X;
+		edges[1].Curr.x = pg[1].x;
 		edges[1].Curr.y = pg[1].y;
 		if (ClipperLib.use_xyz) edges[1].Curr.Z = pg[1].Z;
 
@@ -2998,7 +2998,7 @@
 
 			for (; ;)
 			{
-				if (E.Bot.x !== E.Prev.Top.X) this.ReverseHorizontal(E);
+				if (E.Bot.x !== E.Prev.Top.x) this.ReverseHorizontal(E);
 				if (E.Next.OutIdx === ClipperLib.ClipperBase.Skip) break;
 				E.NextInLML = E.Next;
 				E = E.Next;
@@ -3085,8 +3085,8 @@
 			//if ((pt1 == pt3) || (pt1 == pt2) || (pt3 == pt2))
 			return false;
 
-		else if (pt1.x !== pt3.X)
-			return (pt2.x > pt1.X) === (pt2.x < pt3.X);
+		else if (pt1.x !== pt3.x)
+			return (pt2.x > pt1.x) === (pt2.x < pt3.x);
 		else
 			return (pt2.y > pt1.y) === (pt2.y < pt3.y);
 	};
@@ -3103,10 +3103,10 @@
 
 	ClipperLib.ClipperBase.prototype.SetDx = function (e)
 	{
-		e.Delta.x = (e.Top.x - e.Bot.X);
+		e.Delta.x = (e.Top.x - e.Bot.x);
 		e.Delta.y = (e.Top.y - e.Bot.y);
 		if (e.Delta.y === 0) e.Dx = ClipperLib.ClipperBase.horizontal;
-		else e.Dx = (e.Delta.X) / (e.Delta.y);
+		else e.Dx = (e.Delta.x) / (e.Delta.y);
 	};
 
 	ClipperLib.ClipperBase.prototype.InsertLocalMinima = function (newLm)
@@ -3146,8 +3146,8 @@
 		//swap horizontal edges' top and bottom x's so they follow the natural
 		//progression of the bounds - ie so their xbots will align with the
 		//adjoining lower edge. [Helpful in the ProcessHorizontal() method.]
-		var tmp = e.Top.X;
-		e.Top.x = e.Bot.X;
+		var tmp = e.Top.x;
+		e.Top.x = e.Bot.x;
 		e.Bot.x = tmp;
 		if (ClipperLib.use_xyz)
 		{
@@ -3172,7 +3172,7 @@
 			if (e !== null)
 			{
 				//e.Curr = e.Bot;
-				e.Curr.x = e.Bot.X;
+				e.Curr.x = e.Bot.x;
 				e.Curr.y = e.Bot.y;
 				if (ClipperLib.use_xyz) e.Curr.Z = e.Bot.Z;
 				e.OutIdx = ClipperLib.ClipperBase.Unassigned;
@@ -3181,7 +3181,7 @@
 			if (e !== null)
 			{
 				//e.Curr = e.Bot;
-				e.Curr.x = e.Bot.X;
+				e.Curr.x = e.Bot.x;
 				e.Curr.y = e.Bot.y;
 				if (ClipperLib.use_xyz) e.Curr.Z = e.Bot.Z;
 				e.OutIdx = ClipperLib.ClipperBase.Unassigned;
@@ -3291,7 +3291,7 @@
 		e.NextInLML.WindCnt = e.WindCnt;
 		e.NextInLML.WindCnt2 = e.WindCnt2;
 		e = e.NextInLML;
-		e.Curr.x = e.Bot.X;
+		e.Curr.x = e.Bot.x;
 		e.Curr.y = e.Bot.y;
 		e.PrevInAEL = AelPrev;
 		e.NextInAEL = AelNext;
@@ -3477,7 +3477,7 @@
 			this.m_Maxima.Next = null;
 			this.m_Maxima.Prev = null;
 		}
-		else if (X < this.m_Maxima.X)
+		else if (X < this.m_Maxima.x)
 		{
 			newMax.Next = this.m_Maxima;
 			newMax.Prev = null;
@@ -3486,11 +3486,11 @@
 		else
 		{
 			var m = this.m_Maxima;
-			while (m.Next !== null && X >= m.Next.X)
+			while (m.Next !== null && X >= m.Next.x)
 			{
 				m = m.Next;
 			}
-			if (X === m.X)
+			if (X === m.x)
 			{
 				return;
 			} //ie ignores duplicates (& CG to clean up newMax)
@@ -3669,7 +3669,7 @@
 		j.OutPt1 = Op1;
 		j.OutPt2 = Op2;
 		//j.OffPt = OffPt;
-		j.OffPt.x = OffPt.X;
+		j.OffPt.x = OffPt.x;
 		j.OffPt.y = OffPt.y;
 		if (ClipperLib.use_xyz) j.OffPt.Z = OffPt.Z;
 		this.m_Joins.push(j);
@@ -3680,7 +3680,7 @@
 		var j = new ClipperLib.Join();
 		j.OutPt1 = Op;
 		//j.OffPt = OffPt;
-		j.OffPt.x = OffPt.X;
+		j.OffPt.x = OffPt.x;
 		j.OffPt.y = OffPt.y;
 		if (ClipperLib.use_xyz) j.OffPt.Z = OffPt.Z;
 		this.m_GhostJoins.push(j);
@@ -3765,7 +3765,7 @@
 					//the 'ghost' join to a real join ready for later ...
 					var j = this.m_GhostJoins[i];
 
-					if (this.HorzSegmentsOverlap(j.OutPt1.Pt.X, j.OffPt.X, rb.Bot.X, rb.Top.X))
+					if (this.HorzSegmentsOverlap(j.OutPt1.Pt.x, j.OffPt.x, rb.Bot.x, rb.Top.x))
 						this.AddJoin(j.OutPt1, Op1, j.OffPt);
 				}
 			}
@@ -3833,7 +3833,7 @@
 
 	ClipperLib.Clipper.prototype.E2InsertsBeforeE1 = function (e1, e2)
 	{
-		if (e2.Curr.x === e1.Curr.X)
+		if (e2.Curr.x === e1.Curr.x)
 		{
 			if (e2.Top.y > e1.Top.y)
 				return e2.Top.x < ClipperLib.Clipper.TopX(e1, e2.Top.y);
@@ -3841,7 +3841,7 @@
 				return e1.Top.x > ClipperLib.Clipper.TopX(e2, e1.Top.y);
 		}
 		else
-			return e2.Curr.x < e1.Curr.X;
+			return e2.Curr.x < e1.Curr.x;
 	};
 
 	ClipperLib.Clipper.prototype.IsEvenOddFillType = function (edge)
@@ -4238,7 +4238,7 @@
 			outRec.Pts = newOp;
 			newOp.Idx = outRec.Idx;
 			//newOp.Pt = pt;
-			newOp.Pt.x = pt.X;
+			newOp.Pt.x = pt.x;
 			newOp.Pt.y = pt.y;
 			if (ClipperLib.use_xyz) newOp.Pt.Z = pt.Z;
 			newOp.Next = newOp;
@@ -4262,7 +4262,7 @@
 			var newOp = new ClipperLib.OutPt();
 			newOp.Idx = outRec.Idx;
 			//newOp.Pt = pt;
-			newOp.Pt.x = pt.X;
+			newOp.Pt.x = pt.x;
 			newOp.Pt.y = pt.y;
 			if (ClipperLib.use_xyz) newOp.Pt.Z = pt.Z;
 			newOp.Next = op;
@@ -4292,11 +4292,11 @@
 	{
 		var tmp = new ClipperLib.IntPoint1(pt1.Value);
 		//pt1.Value = pt2.Value;
-		pt1.Value.x = pt2.Value.X;
+		pt1.Value.x = pt2.Value.x;
 		pt1.Value.y = pt2.Value.y;
 		if (ClipperLib.use_xyz) pt1.Value.Z = pt2.Value.Z;
 		//pt2.Value = tmp;
-		pt2.Value.x = tmp.X;
+		pt2.Value.x = tmp.x;
 		pt2.Value.y = tmp.y;
 		if (ClipperLib.use_xyz) pt2.Value.Z = tmp.Z;
 	};
@@ -4352,7 +4352,7 @@
 		if (pt1.y === pt2.y)
 			return ClipperLib.ClipperBase.horizontal;
 		else
-			return (pt2.x - pt1.X) / (pt2.y - pt1.y);
+			return (pt2.x - pt1.x) / (pt2.y - pt1.y);
 	};
 
 	ClipperLib.Clipper.prototype.FirstIsBottomPt = function (btmPt1, btmPt2)
@@ -4395,9 +4395,9 @@
 				pp = p;
 				dups = null;
 			}
-			else if (p.Pt.y === pp.Pt.y && p.Pt.x <= pp.Pt.X)
+			else if (p.Pt.y === pp.Pt.y && p.Pt.x <= pp.Pt.x)
 			{
-				if (p.Pt.x < pp.Pt.X)
+				if (p.Pt.x < pp.Pt.x)
 				{
 					dups = null;
 					pp = p;
@@ -4438,9 +4438,9 @@
 			return outRec1;
 		else if (bPt1.Pt.y < bPt2.Pt.y)
 			return outRec2;
-		else if (bPt1.Pt.x < bPt2.Pt.X)
+		else if (bPt1.Pt.x < bPt2.Pt.x)
 			return outRec1;
-		else if (bPt1.Pt.x > bPt2.Pt.X)
+		else if (bPt1.Pt.x > bPt2.Pt.x)
 			return outRec2;
 		else if (bPt1.Next === bPt1)
 			return outRec2;
@@ -4853,16 +4853,16 @@
 
 	ClipperLib.Clipper.prototype.GetHorzDirection = function (HorzEdge, $var)
 	{
-		if (HorzEdge.Bot.x < HorzEdge.Top.X)
+		if (HorzEdge.Bot.x < HorzEdge.Top.x)
 		{
-			$var.Left = HorzEdge.Bot.X;
-			$var.Right = HorzEdge.Top.X;
+			$var.Left = HorzEdge.Bot.x;
+			$var.Right = HorzEdge.Top.x;
 			$var.Dir = ClipperLib.Direction.dLeftToRight;
 		}
 		else
 		{
-			$var.Left = HorzEdge.Top.X;
-			$var.Right = HorzEdge.Bot.X;
+			$var.Left = HorzEdge.Top.x;
+			$var.Right = HorzEdge.Bot.x;
 			$var.Dir = ClipperLib.Direction.dRightToLeft;
 		}
 	};
@@ -4895,22 +4895,22 @@
 			//get the first maxima in range (X) ...
 			if (dir === ClipperLib.Direction.dLeftToRight)
 			{
-				while (currMax !== null && currMax.x <= horzEdge.Bot.X)
+				while (currMax !== null && currMax.x <= horzEdge.Bot.x)
 				{
 					currMax = currMax.Next;
 				}
-				if (currMax !== null && currMax.x >= eLastHorz.Top.X)
+				if (currMax !== null && currMax.x >= eLastHorz.Top.x)
 				{
 					currMax = null;
 				}
 			}
 			else
 			{
-				while (currMax.Next !== null && currMax.Next.x < horzEdge.Bot.X)
+				while (currMax.Next !== null && currMax.Next.x < horzEdge.Bot.x)
 				{
 					currMax = currMax.Next;
 				}
-				if (currMax.x <= eLastHorz.Top.X)
+				if (currMax.x <= eLastHorz.Top.x)
 				{
 					currMax = null;
 				}
@@ -4930,22 +4930,22 @@
 				{
 					if (dir === ClipperLib.Direction.dLeftToRight)
 					{
-						while (currMax !== null && currMax.x < e.Curr.X)
+						while (currMax !== null && currMax.x < e.Curr.x)
 						{
 							if (horzEdge.OutIdx >= 0 && !IsOpen)
 							{
-								this.AddOutPt(horzEdge, new ClipperLib.IntPoint2(currMax.X, horzEdge.Bot.y));
+								this.AddOutPt(horzEdge, new ClipperLib.IntPoint2(currMax.x, horzEdge.Bot.y));
 							}
 							currMax = currMax.Next;
 						}
 					}
 					else
 					{
-						while (currMax !== null && currMax.x > e.Curr.X)
+						while (currMax !== null && currMax.x > e.Curr.x)
 						{
 							if (horzEdge.OutIdx >= 0 && !IsOpen)
 							{
-								this.AddOutPt(horzEdge, new ClipperLib.IntPoint2(currMax.X, horzEdge.Bot.y));
+								this.AddOutPt(horzEdge, new ClipperLib.IntPoint2(currMax.x, horzEdge.Bot.y));
 							}
 							currMax = currMax.Prev;
 						}
@@ -4975,7 +4975,7 @@
 					var eNextHorz = this.m_SortedEdges;
 					while (eNextHorz !== null)
 					{
-						if (eNextHorz.OutIdx >= 0 && this.HorzSegmentsOverlap(horzEdge.Bot.X, horzEdge.Top.X, eNextHorz.Bot.X, eNextHorz.Top.X))
+						if (eNextHorz.OutIdx >= 0 && this.HorzSegmentsOverlap(horzEdge.Bot.x, horzEdge.Top.x, eNextHorz.Bot.x, eNextHorz.Top.x))
 						{
 							var op2 = this.GetLastOutPt(eNextHorz);
 							this.AddJoin(op2, op1, eNextHorz.Top);
@@ -5000,12 +5000,12 @@
 
 				if (dir === ClipperLib.Direction.dLeftToRight)
 				{
-					var Pt = new ClipperLib.IntPoint2(e.Curr.X, horzEdge.Curr.y);
+					var Pt = new ClipperLib.IntPoint2(e.Curr.x, horzEdge.Curr.y);
 					this.IntersectEdges(horzEdge, e, Pt);
 				}
 				else
 				{
-					var Pt = new ClipperLib.IntPoint2(e.Curr.X, horzEdge.Curr.y);
+					var Pt = new ClipperLib.IntPoint2(e.Curr.x, horzEdge.Curr.y);
 					this.IntersectEdges(e, horzEdge, Pt);
 				}
 				var eNext = this.GetNextInAEL(e, dir);
@@ -5044,7 +5044,7 @@
 			var eNextHorz = this.m_SortedEdges;
 			while (eNextHorz !== null)
 			{
-				if (eNextHorz.OutIdx >= 0 && this.HorzSegmentsOverlap(horzEdge.Bot.X, horzEdge.Top.X, eNextHorz.Bot.X, eNextHorz.Top.X))
+				if (eNextHorz.OutIdx >= 0 && this.HorzSegmentsOverlap(horzEdge.Bot.x, horzEdge.Top.x, eNextHorz.Bot.x, eNextHorz.Top.x))
 				{
 					var op2 = this.GetLastOutPt(eNextHorz);
 					this.AddJoin(op2, op1, eNextHorz.Top);
@@ -5194,8 +5194,8 @@
 			{
 				var eNext = e.NextInSEL;
 				var pt = new ClipperLib.IntPoint0();
-				//console.log("e.Curr.X: " + e.Curr.x+ " eNext.Curr.X" + eNext.Curr.X);
-				if (e.Curr.x > eNext.Curr.X)
+				//console.log("e.Curr.x: " + e.Curr.x+ " eNext.Curr.x" + eNext.Curr.x);
+				if (e.Curr.x > eNext.Curr.x)
 				{
 					this.IntersectPoint(e, eNext, pt);
 					if (pt.y < topY)
@@ -5206,7 +5206,7 @@
 					newNode.Edge1 = e;
 					newNode.Edge2 = eNext;
 					//newNode.Pt = pt;
-					newNode.Pt.x = pt.X;
+					newNode.Pt.x = pt.x;
 					newNode.Pt.y = pt.y;
 					if (ClipperLib.use_xyz) newNode.Pt.Z = pt.Z;
 					this.m_IntersectList.push(newNode);
@@ -5316,7 +5316,7 @@
 		//if (edge.Bot == edge.Curr) alert ("edge.Bot = edge.Curr");
 		//if (edge.Bot == edge.Top) alert ("edge.Bot = edge.Top");
 		if (currentY === edge.Top.y)
-			return edge.Top.X;
+			return edge.Top.x;
 		return edge.Bot.x + ClipperLib.Clipper.Round(edge.Dx * (currentY - edge.Bot.y));
 	};
 
@@ -5335,7 +5335,7 @@
 		}
 		if (edge1.Delta.x === 0)
 		{
-			ip.x = edge1.Bot.X;
+			ip.x = edge1.Bot.x;
 			if (ClipperLib.ClipperBase.IsHorizontal(edge2))
 			{
 				ip.y = edge2.Bot.y;
@@ -5348,7 +5348,7 @@
 		}
 		else if (edge2.Delta.x === 0)
 		{
-			ip.x = edge2.Bot.X;
+			ip.x = edge2.Bot.x;
 			if (ClipperLib.ClipperBase.IsHorizontal(edge1))
 			{
 				ip.y = edge1.Bot.y;
@@ -5376,7 +5376,7 @@
 			{
 				ip.y = edge1.Top.y;
 				ip.x = ClipperLib.Clipper.TopX(edge2, edge1.Top.y);
-				return ip.x < edge1.Top.X;
+				return ip.x < edge1.Top.x;
 			}
 			else
 				ip.y = edge2.Top.y;
@@ -5415,7 +5415,7 @@
 			{
 				if (this.StrictlySimple)
 				{
-					this.InsertMaxima(e.Top.X);
+					this.InsertMaxima(e.Top.x);
 				}
 				var ePrev = e.PrevInAEL;
 				this.DoMaxima(e);
@@ -5453,7 +5453,7 @@
 				{
 					var ePrev = e.PrevInAEL;
 					if ((e.OutIdx >= 0) && (e.WindDelta !== 0) && ePrev !== null &&
-						(ePrev.OutIdx >= 0) && (ePrev.Curr.x === e.Curr.X) &&
+						(ePrev.OutIdx >= 0) && (ePrev.Curr.x === e.Curr.x) &&
 						(ePrev.WindDelta !== 0))
 					{
 						var ip = new ClipperLib.IntPoint1(e.Curr);
@@ -5705,7 +5705,7 @@
 	{
 		var result = new ClipperLib.OutPt();
 		//result.Pt = outPt.Pt;
-		result.Pt.x = outPt.Pt.X;
+		result.Pt.x = outPt.Pt.x;
 		result.Pt.y = outPt.Pt.y;
 		if (ClipperLib.use_xyz) result.Pt.Z = outPt.Pt.Z;
 		result.Idx = outPt.Idx;
@@ -5773,14 +5773,14 @@
 			while (op1.Next.Pt.x <= Pt.x &&
 				op1.Next.Pt.x >= op1.Pt.x && op1.Next.Pt.y === Pt.y)
 				op1 = op1.Next;
-			if (DiscardLeft && (op1.Pt.x !== Pt.X))
+			if (DiscardLeft && (op1.Pt.x !== Pt.x))
 				op1 = op1.Next;
 			op1b = this.DupOutPt(op1, !DiscardLeft);
 			if (ClipperLib.IntPoint.op_Inequality(op1b.Pt, Pt))
 			{
 				op1 = op1b;
 				//op1.Pt = Pt;
-				op1.Pt.x = Pt.X;
+				op1.Pt.x = Pt.x;
 				op1.Pt.y = Pt.y;
 				if (ClipperLib.use_xyz) op1.Pt.Z = Pt.Z;
 				op1b = this.DupOutPt(op1, !DiscardLeft);
@@ -5791,14 +5791,14 @@
 			while (op1.Next.Pt.x >= Pt.x &&
 				op1.Next.Pt.x <= op1.Pt.x && op1.Next.Pt.y === Pt.y)
 				op1 = op1.Next;
-			if (!DiscardLeft && (op1.Pt.x !== Pt.X))
+			if (!DiscardLeft && (op1.Pt.x !== Pt.x))
 				op1 = op1.Next;
 			op1b = this.DupOutPt(op1, DiscardLeft);
 			if (ClipperLib.IntPoint.op_Inequality(op1b.Pt, Pt))
 			{
 				op1 = op1b;
 				//op1.Pt = Pt;
-				op1.Pt.x = Pt.X;
+				op1.Pt.x = Pt.x;
 				op1.Pt.y = Pt.y;
 				if (ClipperLib.use_xyz) op1.Pt.Z = Pt.Z;
 				op1b = this.DupOutPt(op1, DiscardLeft);
@@ -5809,14 +5809,14 @@
 			while (op2.Next.Pt.x <= Pt.x &&
 				op2.Next.Pt.x >= op2.Pt.x && op2.Next.Pt.y === Pt.y)
 				op2 = op2.Next;
-			if (DiscardLeft && (op2.Pt.x !== Pt.X))
+			if (DiscardLeft && (op2.Pt.x !== Pt.x))
 				op2 = op2.Next;
 			op2b = this.DupOutPt(op2, !DiscardLeft);
 			if (ClipperLib.IntPoint.op_Inequality(op2b.Pt, Pt))
 			{
 				op2 = op2b;
 				//op2.Pt = Pt;
-				op2.Pt.x = Pt.X;
+				op2.Pt.x = Pt.x;
 				op2.Pt.y = Pt.y;
 				if (ClipperLib.use_xyz) op2.Pt.Z = Pt.Z;
 				op2b = this.DupOutPt(op2, !DiscardLeft);
@@ -5827,14 +5827,14 @@
 			while (op2.Next.Pt.x >= Pt.x &&
 				op2.Next.Pt.x <= op2.Pt.x && op2.Next.Pt.y === Pt.y)
 				op2 = op2.Next;
-			if (!DiscardLeft && (op2.Pt.x !== Pt.X))
+			if (!DiscardLeft && (op2.Pt.x !== Pt.x))
 				op2 = op2.Next;
 			op2b = this.DupOutPt(op2, DiscardLeft);
 			if (ClipperLib.IntPoint.op_Inequality(op2b.Pt, Pt))
 			{
 				op2 = op2b;
 				//op2.Pt = Pt;
-				op2.Pt.x = Pt.X;
+				op2.Pt.x = Pt.x;
 				op2.Pt.y = Pt.y;
 				if (ClipperLib.use_xyz) op2.Pt.Z = Pt.Z;
 				op2b = this.DupOutPt(op2, DiscardLeft);
@@ -5939,7 +5939,7 @@
 				Right: null
 			};
 
-			if (!this.GetOverlap(op1.Pt.X, op1b.Pt.X, op2.Pt.X, op2b.Pt.X, $val))
+			if (!this.GetOverlap(op1.Pt.x, op1b.Pt.x, op2.Pt.x, op2b.Pt.x, $val))
 				return false;
 			var Left = $val.Left;
 			var Right = $val.Right;
@@ -5952,34 +5952,34 @@
 			if (op1.Pt.x >= Left && op1.Pt.x <= Right)
 			{
 				//Pt = op1.Pt;
-				Pt.x = op1.Pt.X;
+				Pt.x = op1.Pt.x;
 				Pt.y = op1.Pt.y;
 				if (ClipperLib.use_xyz) Pt.Z = op1.Pt.Z;
-				DiscardLeftSide = (op1.Pt.x > op1b.Pt.X);
+				DiscardLeftSide = (op1.Pt.x > op1b.Pt.x);
 			}
 			else if (op2.Pt.x >= Left && op2.Pt.x <= Right)
 			{
 				//Pt = op2.Pt;
-				Pt.x = op2.Pt.X;
+				Pt.x = op2.Pt.x;
 				Pt.y = op2.Pt.y;
 				if (ClipperLib.use_xyz) Pt.Z = op2.Pt.Z;
-				DiscardLeftSide = (op2.Pt.x > op2b.Pt.X);
+				DiscardLeftSide = (op2.Pt.x > op2b.Pt.x);
 			}
 			else if (op1b.Pt.x >= Left && op1b.Pt.x <= Right)
 			{
 				//Pt = op1b.Pt;
-				Pt.x = op1b.Pt.X;
+				Pt.x = op1b.Pt.x;
 				Pt.y = op1b.Pt.y;
 				if (ClipperLib.use_xyz) Pt.Z = op1b.Pt.Z;
-				DiscardLeftSide = op1b.Pt.x > op1.Pt.X;
+				DiscardLeftSide = op1b.Pt.x > op1.Pt.x;
 			}
 			else
 			{
 				//Pt = op2b.Pt;
-				Pt.x = op2b.Pt.X;
+				Pt.x = op2b.Pt.x;
 				Pt.y = op2b.Pt.y;
 				if (ClipperLib.use_xyz) Pt.Z = op2b.Pt.Z;
-				DiscardLeftSide = (op2b.Pt.x > op2.Pt.X);
+				DiscardLeftSide = (op2b.Pt.x > op2.Pt.x);
 			}
 			j.OutPt1 = op1;
 			j.OutPt2 = op2;
@@ -6055,15 +6055,15 @@
 		while (i < cnt && paths[i].length === 0) i++;
 		if (i === cnt) return new ClipperLib.IntRect(0, 0, 0, 0);
 		var result = new ClipperLib.IntRect();
-		result.left = paths[i][0].X;
+		result.left = paths[i][0].x;
 		result.right = result.left;
 		result.top = paths[i][0].y;
 		result.bottom = result.top;
 		for (; i < cnt; i++)
 			for (var j = 0, jlen = paths[i].length; j < jlen; j++)
 			{
-				if (paths[i][j].x < result.left) result.left = paths[i][j].X;
-				else if (paths[i][j].x > result.right) result.right = paths[i][j].X;
+				if (paths[i][j].x < result.left) result.left = paths[i][j].x;
+				else if (paths[i][j].x > result.right) result.right = paths[i][j].x;
 				if (paths[i][j].y < result.top) result.top = paths[i][j].y;
 				else if (paths[i][j].y > result.bottom) result.bottom = paths[i][j].y;
 			}
@@ -6073,17 +6073,17 @@
 	{
 		var opStart = ops;
 		var result = new ClipperLib.IntRect();
-		result.left = ops.Pt.X;
-		result.right = ops.Pt.X;
+		result.left = ops.Pt.x;
+		result.right = ops.Pt.x;
 		result.top = ops.Pt.y;
 		result.bottom = ops.Pt.y;
 		ops = ops.Next;
 		while (ops !== opStart)
 		{
 			if (ops.Pt.x < result.left)
-				result.left = ops.Pt.X;
+				result.left = ops.Pt.x;
 			if (ops.Pt.x > result.right)
-				result.right = ops.Pt.X;
+				result.right = ops.Pt.x;
 			if (ops.Pt.y < result.top)
 				result.top = ops.Pt.y;
 			if (ops.Pt.y > result.bottom)
@@ -6108,18 +6108,18 @@
 			var ipNext = (i === cnt ? path[0] : path[i]);
 			if (ipNext.y === pt.y)
 			{
-				if ((ipNext.x === pt.X) || (ip.y === pt.y && ((ipNext.x > pt.X) === (ip.x < pt.X))))
+				if ((ipNext.x === pt.x) || (ip.y === pt.y && ((ipNext.x > pt.x) === (ip.x < pt.x))))
 					return -1;
 			}
 			if ((ip.y < pt.y) !== (ipNext.y < pt.y))
 			{
-				if (ip.x >= pt.X)
+				if (ip.x >= pt.x)
 				{
-					if (ipNext.x > pt.X)
+					if (ipNext.x > pt.x)
 						result = 1 - result;
 					else
 					{
-						var d = (ip.x - pt.X) * (ipNext.y - pt.y) - (ipNext.x - pt.X) * (ip.y - pt.y);
+						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
 						if (d === 0)
 							return -1;
 						else if ((d > 0) === (ipNext.y > ip.y))
@@ -6128,9 +6128,9 @@
 				}
 				else
 				{
-					if (ipNext.x > pt.X)
+					if (ipNext.x > pt.x)
 					{
-						var d = (ip.x - pt.X) * (ipNext.y - pt.y) - (ipNext.x - pt.X) * (ip.y - pt.y);
+						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
 						if (d === 0)
 							return -1;
 						else if ((d > 0) === (ipNext.y > ip.y))
@@ -6148,14 +6148,14 @@
 		//returns 0 if false, +1 if true, -1 if pt ON polygon boundary
 		var result = 0;
 		var startOp = op;
-		var ptx = pt.X,
+		var ptx = pt.x,
 			pty = pt.y;
-		var poly0x = op.Pt.X,
+		var poly0x = op.Pt.x,
 			poly0y = op.Pt.y;
 		do
 		{
 			op = op.Next;
-			var poly1x = op.Pt.X,
+			var poly1x = op.Pt.x,
 				poly1y = op.Pt.y;
 			if (poly1y === pty)
 			{
@@ -6445,7 +6445,7 @@
 		var a = 0;
 		for (var i = 0, j = cnt - 1; i < cnt; ++i)
 		{
-			a += (poly[j].x + poly[i].X) * (poly[j].y - poly[i].y);
+			a += (poly[j].x + poly[i].x) * (poly[j].y - poly[i].y);
 			j = i;
 		}
 		return -a * 0.5;
@@ -6458,7 +6458,7 @@
 		var a = 0;
 		do
 		{
-			a = a + (op.Prev.Pt.x + op.Pt.X) * (op.Prev.Pt.y - op.Pt.y);
+			a = a + (op.Prev.Pt.x + op.Pt.x) * (op.Prev.Pt.y - op.Pt.y);
 			op = op.Next;
 		} while (op !== opFirst); // && typeof op !== 'undefined');
 		return a * 0.5;
@@ -6492,7 +6492,7 @@
 
 	ClipperLib.Clipper.DistanceSqrd = function (pt1, pt2)
 	{
-		var dx = (pt1.x - pt2.X);
+		var dx = (pt1.x - pt2.x);
 		var dy = (pt1.y - pt2.y);
 		return (dx * dx + dy * dy);
 	};
@@ -6506,7 +6506,7 @@
 		//perpendicular distance of point (x³,y³) = (Ax³ + By³ + C)/Sqrt(A² + B²)
 		//see http://en.wikipedia.org/wiki/Perpendicular_distance
 		var A = ln1.y - ln2.y;
-		var B = ln2.x - ln1.X;
+		var B = ln2.x - ln1.x;
 		var C = A * ln1.x + B * ln1.y;
 		C = A * pt.x + B * pt.y - C;
 		return (C * C) / (A * A + B * B);
@@ -6517,11 +6517,11 @@
 		//this function is more accurate when the point that's GEOMETRICALLY
 		//between the other 2 points is the one that's tested for distance.
 		//nb: with 'spikes', either pt1 or pt3 is geometrically between the other pts
-		if (Math.abs(pt1.x - pt2.X) > Math.abs(pt1.y - pt2.y))
+		if (Math.abs(pt1.x - pt2.x) > Math.abs(pt1.y - pt2.y))
 		{
-			if ((pt1.x > pt2.X) === (pt1.x < pt3.X))
+			if ((pt1.x > pt2.x) === (pt1.x < pt3.x))
 				return ClipperLib.Clipper.DistanceFromLineSqrd(pt1, pt2, pt3) < distSqrd;
-			else if ((pt2.x > pt1.X) === (pt2.x < pt3.X))
+			else if ((pt2.x > pt1.x) === (pt2.x < pt3.x))
 				return ClipperLib.Clipper.DistanceFromLineSqrd(pt2, pt1, pt3) < distSqrd;
 			else
 				return ClipperLib.Clipper.DistanceFromLineSqrd(pt3, pt1, pt2) < distSqrd;
@@ -6539,7 +6539,7 @@
 
 	ClipperLib.Clipper.PointsAreClose = function (pt1, pt2, distSqrd)
 	{
-		var dx = pt1.x - pt2.X;
+		var dx = pt1.x - pt2.x;
 		var dy = pt1.y - pt2.y;
 		return ((dx * dx) + (dy * dy) <= distSqrd);
 	};
@@ -6629,7 +6629,7 @@
 			{
 				var p = new Array(polyCnt);
 				for (var j = 0, jlen = pattern.length, ip = pattern[j]; j < jlen; j++ , ip = pattern[j])
-					p[j] = new ClipperLib.IntPoint2(path[i].x + ip.X, path[i].y + ip.y);
+					p[j] = new ClipperLib.IntPoint2(path[i].x + ip.x, path[i].y + ip.y);
 				result.push(p);
 			}
 		else
@@ -6637,7 +6637,7 @@
 			{
 				var p = new Array(polyCnt);
 				for (var j = 0, jlen = pattern.length, ip = pattern[j]; j < jlen; j++ , ip = pattern[j])
-					p[j] = new ClipperLib.IntPoint2(path[i].x - ip.X, path[i].y - ip.y);
+					p[j] = new ClipperLib.IntPoint2(path[i].x - ip.x, path[i].y - ip.y);
 				result.push(p);
 			}
 		var quads = new Array();
@@ -6692,7 +6692,7 @@
 	{
 		var outPath = new ClipperLib.Path();
 		for (var i = 0; i < path.length; i++)
-			outPath.push(new ClipperLib.IntPoint2(path[i].x + delta.X, path[i].y + delta.y));
+			outPath.push(new ClipperLib.IntPoint2(path[i].x + delta.x, path[i].y + delta.y));
 		return outPath;
 	}
 
@@ -6811,7 +6811,7 @@
 			{
 				j++;
 				newNode.m_polygon.push(path[i]);
-				if (path[i].y > newNode.m_polygon[k].y || (path[i].y === newNode.m_polygon[k].y && path[i].x < newNode.m_polygon[k].X))
+				if (path[i].y > newNode.m_polygon[k].y || (path[i].y === newNode.m_polygon[k].y && path[i].x < newNode.m_polygon[k].x))
 					k = j;
 			}
 		if (endType === ClipperLib.EndType.etClosedPolygon && j < 2) return;
@@ -6824,8 +6824,8 @@
 			this.m_lowest = new ClipperLib.IntPoint2(this.m_polyNodes.ChildCount() - 1, k);
 		else
 		{
-			var ip = this.m_polyNodes.Childs()[this.m_lowest.X].m_polygon[this.m_lowest.y];
-			if (newNode.m_polygon[k].y > ip.y || (newNode.m_polygon[k].y === ip.y && newNode.m_polygon[k].x < ip.X))
+			var ip = this.m_polyNodes.Childs()[this.m_lowest.x].m_polygon[this.m_lowest.y];
+			if (newNode.m_polygon[k].y > ip.y || (newNode.m_polygon[k].y === ip.y && newNode.m_polygon[k].x < ip.x))
 				this.m_lowest = new ClipperLib.IntPoint2(this.m_polyNodes.ChildCount() - 1, k);
 		}
 	};
@@ -6840,7 +6840,7 @@
 	{
 		//fixup orientations of all closed paths if the orientation of the
 		//closed path with the lowermost vertex is wrong ...
-		if (this.m_lowest.x >= 0 && !ClipperLib.Clipper.Orientation(this.m_polyNodes.Childs()[this.m_lowest.X].m_polygon))
+		if (this.m_lowest.x >= 0 && !ClipperLib.Clipper.Orientation(this.m_polyNodes.Childs()[this.m_lowest.x].m_polygon))
 		{
 			for (var i = 0; i < this.m_polyNodes.ChildCount(); i++)
 			{
@@ -6862,7 +6862,7 @@
 
 	ClipperLib.ClipperOffset.GetUnitNormal = function (pt1, pt2)
 	{
-		var dx = (pt2.x - pt1.X);
+		var dx = (pt2.x - pt1.x);
 		var dy = (pt2.y - pt1.y);
 		if ((dx === 0) && (dy === 0))
 			return new ClipperLib.DoublePoint2(0, 0);
@@ -6974,8 +6974,8 @@
 				//re-build m_normals ...
 				var n = this.m_normals[len - 1];
 				for (var j = len - 1; j > 0; j--)
-					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j - 1].X, -this.m_normals[j - 1].y);
-				this.m_normals[0] = new ClipperLib.DoublePoint2(-n.X, -n.y);
+					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j - 1].x, -this.m_normals[j - 1].y);
+				this.m_normals[0] = new ClipperLib.DoublePoint2(-n.x, -n.y);
 				k = 0;
 				for (var j = len - 1; j >= 0; j--)
 					k = this.OffsetPoint(j, k, node.m_jointype);
@@ -7000,7 +7000,7 @@
 					var j = len - 1;
 					k = len - 2;
 					this.m_sinA = 0;
-					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j].X, -this.m_normals[j].y);
+					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j].x, -this.m_normals[j].y);
 					if (node.m_endtype === ClipperLib.EndType.etOpenSquare)
 						this.DoSquare(j, k);
 					else
@@ -7008,8 +7008,8 @@
 				}
 				//re-build m_normals ...
 				for (var j = len - 1; j > 0; j--)
-					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j - 1].X, -this.m_normals[j - 1].y);
-				this.m_normals[0] = new ClipperLib.DoublePoint2(-this.m_normals[1].X, -this.m_normals[1].y);
+					this.m_normals[j] = new ClipperLib.DoublePoint2(-this.m_normals[j - 1].x, -this.m_normals[j - 1].y);
+				this.m_normals[0] = new ClipperLib.DoublePoint2(-this.m_normals[1].x, -this.m_normals[1].y);
 				k = len - 1;
 				for (var j = k - 1; j > 0; --j)
 					k = this.OffsetPoint(j, k, node.m_jointype);
@@ -7177,7 +7177,7 @@
 	{
 		var q = this.m_delta / r;
 		this.m_destPoly.push(new ClipperLib.IntPoint2(
-			ClipperLib.ClipperOffset.Round(this.m_srcPoly[j].x + (this.m_normals[k].x + this.m_normals[j].X) * q),
+			ClipperLib.ClipperOffset.Round(this.m_srcPoly[j].x + (this.m_normals[k].x + this.m_normals[j].x) * q),
 			ClipperLib.ClipperOffset.Round(this.m_srcPoly[j].y + (this.m_normals[k].y + this.m_normals[j].y) * q)));
 	};
 
@@ -7188,7 +7188,7 @@
 
 		var steps = Math.max(ClipperLib.Cast_Int32(ClipperLib.ClipperOffset.Round(this.m_StepsPerRad * Math.abs(a))), 1);
 
-		var X = this.m_normals[k].X,
+		var X = this.m_normals[k].x,
 			Y = this.m_normals[k].y,
 			X2;
 		for (var i = 0; i < steps; ++i)
@@ -7290,7 +7290,7 @@
 			j = 1;
 			for (i = 1; i < len; i++)
 			{
-				if ((poly[i].x - p.X) * (poly[i].x - p.X) +
+				if ((poly[i].x - p.x) * (poly[i].x - p.x) +
 					(poly[i].y - p.y) * (poly[i].y - p.y) <= d)
 					continue;
 				result[j] = poly[i];
@@ -7298,7 +7298,7 @@
 				j++;
 			}
 			p = poly[j - 1];
-			if ((poly[0].x - p.X) * (poly[0].x - p.X) +
+			if ((poly[0].x - p.x) * (poly[0].x - p.x) +
 				(poly[0].y - p.y) * (poly[0].y - p.y) <= d)
 				j--;
 			if (j < len)
@@ -7334,7 +7334,7 @@
 			for (j = 0; j < plen; j++)
 			{
 				result[j] = {
-					X: polygon[i][j].X,
+					X: polygon[i][j].x,
 					Y: polygon[i][j].y
 				};
 
@@ -7383,7 +7383,7 @@
 					addlast = 1;
 					poly.push(
 						{
-							X: poly[0].X,
+							X: poly[0].x,
 							Y: poly[0].y
 						});
 					plen = poly.length;
@@ -7395,7 +7395,7 @@
 					A = poly[j]; // Start point of line segment
 					P = poly[j + 1]; // Middle point. This is the one to be removed.
 					B = poly[j + 2]; // End point of line segment
-					ax = A.X;
+					ax = A.x;
 					ay = A.y;
 					bxax = B.x - ax;
 					byay = B.y - ay;
@@ -7404,7 +7404,7 @@
 						l = ((P.x - ax) * bxax + (P.y - ay) * byay) / (bxax * bxax + byay * byay);
 						if (l > 1)
 						{
-							ax = B.X;
+							ax = B.x;
 							ay = B.y;
 						}
 						else if (l > 0)
@@ -7425,18 +7425,18 @@
 				// add all unremoved points to poly2
 				poly2.push(
 					{
-						X: poly[0].X,
+						X: poly[0].x,
 						Y: poly[0].y
 					});
 				for (j = 1; j < plen - 1; j++)
 					if (!rem[j]) poly2.push(
 						{
-							X: poly[j].X,
+							X: poly[j].x,
 							Y: poly[j].y
 						});
 				poly2.push(
 					{
-						X: poly[plen - 1].X,
+						X: poly[plen - 1].x,
 						Y: poly[plen - 1].y
 					});
 				// if the first point was added to the end, remove it
@@ -7485,10 +7485,10 @@
 		while (--j)
 		{
 			p1 = path[j];
-			p1x = p1.X;
+			p1x = p1.x;
 			p1y = p1.y;
 			p2 = path[j - 1];
-			p2x = p2.X;
+			p2x = p2.x;
 			p2y = p2.y;
 			perimeter += sqrt((p1x - p2x) * (p1x - p2x) + (p1y - p2y) * (p1y - p2y));
 		}

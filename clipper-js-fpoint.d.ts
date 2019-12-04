@@ -1,5 +1,4 @@
-export class Clipper
-{
+export class Clipper {
 
     constructor(InitOptions?: number /** =0 */);
 
@@ -297,8 +296,7 @@ export class Clipper
 
 }
 
-export class ClipperBase
-{
+export class ClipperBase {
     constructor();
 
     AddPath(pg: any, polyType: any, Closed: any): any;
@@ -383,8 +381,7 @@ export class ClipperBase
 
 }
 
-export class ClipperOffset
-{
+export class ClipperOffset {
     private m_destPolys: Paths;
     private m_destPoly: Path;
     /**
@@ -415,8 +412,7 @@ export class ClipperOffset
 export type Path = Array<IFPoint>;
 export type Paths = Array<Path>;
 
-export class PolyNode
-{
+export class PolyNode {
     constructor();
 
     AddChild(Child: any): void;
@@ -439,8 +435,7 @@ export class PolyNode
 
 }
 
-export class PolyTree
-{
+export class PolyTree {
     constructor();
 
     AddChild(Child: any): void;
@@ -469,28 +464,24 @@ export class PolyTree
 
 }
 
-export enum ClipType
-{
+export enum ClipType {
     ctIntersection = 0,
     ctUnion = 1,
     ctDifference = 2,
     ctXor = 3
 }
 
-export enum Direction
-{
+export enum Direction {
     dRightToLeft = 0,
     dLeftToRight = 1
 }
 
-export enum EdgeSide
-{
+export enum EdgeSide {
     esLeft = 0,
     esRight = 1
 }
 
-export enum EndType
-{
+export enum EndType {
     etOpenSquare = 0,
     etOpenRound = 1,
     etOpenButt = 2,
@@ -498,8 +489,7 @@ export enum EndType
     etClosedPolygon = 4
 }
 
-export enum JoinType
-{
+export enum JoinType {
     jtSquare = 0,
     jtRound = 1,
     jtMiter = 2,
@@ -509,16 +499,14 @@ export const PI: number;
 
 export const PI2: number;
 
-export enum PolyFillType
-{
+export enum PolyFillType {
     pftEvenOdd = 0,
     pftNonZero = 1,
     pftPositive = 2,
     pftNegative = 3
 }
 
-export enum PolyType
-{
+export enum PolyType {
     ptSubject = 0,
     ptClip = 1
 }
@@ -529,14 +517,12 @@ export const use_xyz: boolean;
 
 export const version: string;
 
-export interface IFPoint
-{
+export interface IFPoint {
     x: number;
     y: number;
     z?: number;
 }
-export class FPoint implements IFPoint
-{
+export class FPoint implements IFPoint {
     x: number;
     y: number;
     z?: number;
@@ -544,8 +530,7 @@ export class FPoint implements IFPoint
     static op_Inequality(a: IFPoint, b: IFPoint): boolean;
 }
 
-export namespace JS
-{
+export namespace JS {
     function AddOuterPolyNodeToExPolygons(polynode: any, expolygons: any): void;
 
     function AreaOfPolygon(poly: any): any;
@@ -569,4 +554,8 @@ export namespace JS
     function PerimeterOfPaths(paths: any, closed: any): any;
 
     function PolyTreeToExPolygons(polytree: any): any;
+    function ScaleDownPath(path: Path, scale: number): void;
+    function ScaleDownPaths(path: Paths, scale: number): void;
+    function ScaleUpPath(path: Path, scale: number): void;
+    function ScaleUpPaths(paths: Path, scale: number): void;
 }
