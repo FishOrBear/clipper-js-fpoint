@@ -1,5 +1,5 @@
 {
-    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": false,
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": true,
     "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
     "typescript.format.placeOpenBraceOnNewLineForControlBlocks": false,
     "typescript.format.placeOpenBraceOnNewLineForFunctions": false,
