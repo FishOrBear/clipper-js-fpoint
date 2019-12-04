@@ -99,6 +99,11 @@
 	if (nav.indexOf("msie ") != -1) browser.msie = 1;
 	else browser.msie = 0;
 
+	function equal(a, b)
+	{
+		return Math.abs(a - b) < 1e-3;
+	}
+
 	// Here starts the actual Clipper library:
 	// Helper function to support Inheritance in Javascript
 	var Inherit = function (ce, ce2)
@@ -3819,28 +3824,28 @@
 		var ip = path[0];
 		for (var i = 1; i <= cnt; ++i) {
 			var ipNext = (i === cnt ? path[0] : path[i]);
-			if (ipNext.y === pt.y) {
-				if ((ipNext.x === pt.x) || (ip.y === pt.y && ((ipNext.x > pt.x) === (ip.x < pt.x))))
+			if (equal(ipNext.y, pt.y)) {
+				if ((equal(ipNext.x, pt.x)) || (equal(ip.y, pt.y) && ((ipNext.x > pt.x) === (ip.x < pt.x))))
 					return -1;
 			}
-			if ((ip.y < pt.y) !== (ipNext.y < pt.y)) {
-				if (ip.x >= pt.x) {
-					if (ipNext.x > pt.x)
+			if ((ip.y + 1e-5 < pt.y) !== (ipNext.y + 1e-5 < pt.y)) {
+				if (ip.x >= pt.x + 1e-5) {
+					if (ipNext.x > pt.x + 1e-5)
 						result = 1 - result;
 					else {
 						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
 						if (Math.abs(d) < 1e-5)
 							return -1;
-						else if ((d > 0) === (ipNext.y > ip.y))
+						else if ((d > 0) === (ipNext.y > ip.y + 1e-5))
 							result = 1 - result;
 					}
 				}
 				else {
-					if (ipNext.x > pt.x) {
+					if (ipNext.x > pt.x - 1e-5) {
 						var d = (ip.x - pt.x) * (ipNext.y - pt.y) - (ipNext.x - pt.x) * (ip.y - pt.y);
 						if (Math.abs(d) < 1e-5)
 							return -1;
-						else if ((d > 0) === (ipNext.y > ip.y))
+						else if ((d > 0) === (ipNext.y > ip.y + 1e-5))
 							result = 1 - result;
 					}
 				}
